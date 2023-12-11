@@ -19,14 +19,14 @@ const Calculator = () => {
       }
     });
     setCompleteOperation(prevOperation => prevOperation + val);
-};
+  };
 
-const handleOperation = (operation) => {
-  setCompleteOperation(currentValue + " " + operation);
-  setPendingOperation(operation);
-  setPendingValue(currentValue);
-  setCurrentValue('0');
-};
+  const handleOperation = (operation) =>{
+    setCompleteOperation(currentValue + "" + operation)
+    setPendingOperation(operation)
+    setPendingValue(currentValue)
+    setCurrentValue('0')
+  }
 
 
   const handleClear = () => {
@@ -34,6 +34,48 @@ const handleOperation = (operation) => {
     setPendingOperation(null);
     setPendingValue(null);
     setCompleteOperation('');
+  };
+
+  const handleCalculate = () => {
+    if(!pendingOperation || !pendingValue){
+      return;
+    }
+      const num1 = parseFloat(pendingValue)
+      const num2 = parseFloat(currentValue)
+
+      let result
+
+      switch (pendingOperation) {
+        case '+':
+          result = num1 + num2;   
+          break;
+        case '-':
+          result = num1 - num2;   
+          break;
+        case '/':
+          if(num2 !== 0){
+            result = num1 / num2;   
+          }else{
+            setCurrentValue('Error')
+            setCompleteOperation('Error')
+            setPendingValue(null)
+            setPendingOperation(null)
+            return
+          }
+          break;
+        case '*':
+          result = num1 * num2;   
+          break;
+    
+        default:
+          break;
+      }
+    
+    setCompleteOperation(pendingValue + "" + pendingOperation + "" + currentValue + "=" + result)
+    setCurrentValue(result.toString())
+    setPendingOperation(null)
+    setPendingValue(null)
+  
   };
 
   return (
