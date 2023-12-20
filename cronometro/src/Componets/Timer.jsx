@@ -16,7 +16,7 @@ const Timer = () =>{
         const seconds = ("0" + Math.floor(milliseconds/1000) %60).slice(-2)
         const centseconds = ("0" + Math.floor(milliseconds/10) %100).slice(-2)
 
-        console.log(minutes, seconds, centseconds)
+        // console.log(minutes, seconds, centseconds)
         return `${minutes}:${seconds}:${centseconds}`
     }
 
@@ -29,6 +29,16 @@ const Timer = () =>{
     const stopTimer = (interval) => {
         clearInterval(interval)
         return interval
+    }
+
+    const resetTimer = () => {
+        setmilliseconds(0)
+        setTimerOn(false)
+        setLaps([])
+    }
+
+    const addLap = () => {
+        setLaps([...laps, formatTime()])
     }
 
     useEffect(() => {
@@ -47,9 +57,13 @@ const Timer = () =>{
         <div className="timer-container">
             <TimerDisplay time={formatTime()}/>
             <TimerControls 
+            timerOn={timerOn}
             onStart={() => setTimerOn(true)} 
-            onStop={() => setTimerOn(false)}/>
-            <LapList/>
+            onStop={() => setTimerOn(false)}
+            onReset = {resetTimer}
+            onLap = {addLap}
+            />
+            <LapList laps={laps}/>
         </div>
     )
 }
