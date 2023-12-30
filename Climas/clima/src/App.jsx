@@ -13,6 +13,20 @@ function App() {
 
   const api = import.meta.env.VITE_API_KEY || ""
 
+
+  // user efect ativada quando a api é encontrada
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const resposta = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api}&units=metric&lang=pt_br`
+      );
+      setCidade(resposta.data.name);
+      setClima(resposta.data);
+    });
+  }, [api]);
+
   const buscarClima = async () => {
     // Pegando uma api e reformulando a rota de busca repassando outros pametros
     try{
