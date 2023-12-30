@@ -1,11 +1,13 @@
+import './BuscaStyle';
+import { BotaoBuscar, BuscaContainer, InputCidade } from './BuscaStyle';
 
 const Busca = ({cidade, setCidade, buscarClima}) => {
 
     return (
-        <div>
-            <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value) } placeholder="Digite uma cidade..."/>
-            <button onClick={buscarClima}>Buscar</button>
-        </div>
+        <BuscaContainer>
+            <InputCidade type="text" value={cidade} onChange={(e) => setCidade(e.target.value) } placeholder="Digite uma cidade..."/>
+            <BotaoBuscar onClick={buscarClima}>Buscar</BotaoBuscar>
+        </BuscaContainer>
     )
 }
 

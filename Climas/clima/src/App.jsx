@@ -1,6 +1,6 @@
 import Busca from "./Components/Busca"
 import ClimaAtual from "./Components/ClimaAtual"
-import { Titulo } from "./AppStyle"
+import { ClimaContainer, Titulo } from "./AppStyle"
 import { useState, useEffect } from "react"
 import axios from 'axios'
 import Previsao from "./Components/Previsao"
@@ -46,13 +46,13 @@ function App() {
   console.log(clima)
   console.log(previsao)
   return (
-      <div>
+      <ClimaContainer>
         <Titulo>Condições Climáticas</Titulo>
         <Busca cidade={cidade} setCidade={setCidade} buscarClima={buscarClima} />
         {/* Condição para aparecer o clima na Tela */}
         {clima && <ClimaAtual clima={clima}/>}
         {previsao.length > 0 && <Previsao previsoes={previsao}/>}
-      </div>
+      </ClimaContainer>
   )
 }
 
