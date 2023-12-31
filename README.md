@@ -7,3 +7,5 @@ Integrar chamadas de API e manipulação de dados assíncronos.
 Aprofundar-se em roteamento com React Router.
 Implementar boas práticas de desenvolvimento, incluindo testes unitários e estilos de código consistentes.
 Construir projetos práticos para aplicar os conhecimentos adquiridos.
+
+Sinta-se a vontade para colaborar comentando ou contribuindo >.<
