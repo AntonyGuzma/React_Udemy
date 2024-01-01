@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import SearchBar from './components/searchBar'
-import fotoList from './components/fotoList'
-import fotoAmpliada from './components/fotoAmpliada'
+import FotoList from  './components/FotoList'
+import FotoAmpliada from  './components/FotoAmpliada'
 import axios from "axios";
 
 function App() {
 
   const [query, setQuery] = useState('')
   const [categoria, setCategoria] = useState('')
+  const [fotos, setFotos] = useState([])
  
   // Fazendo uma requisição fetch de uma API
   const fetchData = async ({query, categoria}) => {
@@ -17,21 +18,25 @@ function App() {
 
     const response = await axios.get("https://api.unsplash.com/photos/random", {
       params: {
-        client_id: apiKey
+        client_id: apiKey,
+        count: 10,
       }
     })
-    console.log(response)
+
+    setFotos(response.data)
+    console.log(response.data)
   }
 
   useEffect(() => {
     fetchData(query, categoria)
   }, [])
 
+
   return (
     <div className='container'>
       <SearchBar/>
-      <fotoList/>
-      <fotoAmpliada/>
+      <FotoList fotos={fotos}/>
+      <FotoAmpliada/>
     </div>
   )
 }

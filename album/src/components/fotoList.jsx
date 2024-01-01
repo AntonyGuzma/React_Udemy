@@ -1,8 +1,13 @@
 import React from "react";
+import Foto from "./foto";
 
-const fotoList = () => {
+const FotoList = ({fotos}) => {
 
-    return
+    return <div className="album">
+        {fotos.map((foto) => (
+            <Foto key={foto.id} dados={foto}/>
+        ))}
+    </div>
 }
 
-export default fotoList;
+export default FotoList;

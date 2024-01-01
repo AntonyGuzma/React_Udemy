@@ -1,8 +1,8 @@
 import React from "react";
 
-const fotoAmpliada = () => {
+const FotoAmpliada = () => {
 
-    return
+    return <footer>Desenvolvido Por</footer>
 }
 
-export default fotoAmpliada;
+export default FotoAmpliada;
