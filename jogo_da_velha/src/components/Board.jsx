@@ -30,14 +30,21 @@ const Board = () => {
     setIsNext(true)
   }
 
-  //atualizar o jogo quando finalizar a partida
+  //atualizar o jogo 
   useEffect(() => {
-    setInterval(() => {
-        setSquares(Array(9).fill(null))
-        setIsNext(true)
-      }, 5000);
     
-  }, [winner])
+    if(!isNext && !winner){
+
+
+      setaiThinking(true)
+      setTimeout(() => {
+        aiMove(squares, setSquares, setIsNext)
+
+        setaiThinking(false)
+      }, 1000)
+    }
+    
+  }, [isNext,squares,winner])
 
     return (
         <div>
@@ -83,12 +90,35 @@ const calculateWinner = (squares) => {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-          console.log(squares[a], squares[b], squares[c])
+         // console.log(squares[a], squares[b], squares[c])
         return squares[a];
       }
+      
     }
-  
+
     return null;
   };
+
+  const aiMove = (squares, setSquares, setIsNext) =>{
+    
+    let move = null;
+
+    for(let i =0; i< squares.length; i++){
+      if(!squares[i]) {
+        move = i;
+        break
+      }
+    }
+
+    // pegando os quadrados em uma variavel para n utilizar diretamente
+    const newSquares = squares.slice();
+
+    //preencher onde o jopgador clicou 
+    newSquares[move] = "O";
+
+    //preenchendo a array 
+    setSquares(newSquares);
+    setIsNext(true)
+  } 
 
 export default Board;
